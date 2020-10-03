@@ -1,0 +1,1020 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass paper
+\begin_preamble
+\usepackage[dvipsnames]{xcolor}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "language=C,keywordstyle={\color{NavyBlue}},commentstyle={\color{OliveGreen}\itshape},emphstyle={\color{magenta}},breaklines=true,basicstyle={\ttfamily},stringstyle={\color{Peach}},identifierstyle={\color{cyan}}"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\paragraph_spacing double
+Lösungsideen
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Typkonvertierungen
+\end_layout
+
+\begin_layout Subsection
+a
+\end_layout
+
+\begin_layout Standard
+Die Konvertierung wird hier von integer auf float durchgeführt und das ergebnis
+ dann auf double convertiert.
+ Das Ergebnis ist 24.25
+\end_layout
+
+\begin_layout Subsection
+b
+\end_layout
+
+\begin_layout Standard
+Hierbei findet die Konvertierung von char auf int statt und das Ergebnis
+ lautet 97 da 'a' die Zahl 96 im Ansii Table representiert
+\end_layout
+
+\begin_layout Subsection
+c
+\end_layout
+
+\begin_layout Standard
+hierbei wird zuerst eine int division durchgeführt bei der das Ergebnis
+ 3 lautet (sprich die kommastellen werden einfach weggeschnitten) und danach
+ bei der addition der int in float umgewandelt was ein ergebnis von 13.25
+ liefert und das ergebnis als double gespeichert.
+ Eine Verbesserung hierbei wäre einen der beiden int explizit auf float
+ zu casten: 
+\begin_inset listings
+lstparams "language=C,basicstyle={\small}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+double j = f + (float)i / j;
+\end_layout
+
+\end_inset
+
+ Dies liefert das gewünschte/richtige Ergebnis 13.5833333.
+\end_layout
+
+\begin_layout Subsection
+d
+\end_layout
+
+\begin_layout Standard
+Float wird zu double Konvertriert, char zu int und danach int zu double
+ bei der Multiplikation.
+ 
+\end_layout
+
+\begin_layout Subsection
+e
+\end_layout
+
+\begin_layout Standard
+Hier ist das ergebnis der 'else' Zweig (also 'B'), da bei der kombination
+ von signed und unsingned int der signed zu unsigend 
+\begin_inset Quotes eld
+\end_inset
+
+konvertiert
+\begin_inset Quotes erd
+\end_inset
+
+ wird und -25 ein einfach 25 vom INT_MAX abzieht.
+\end_layout
+
+\begin_layout Section
+Buffer-Overflow: Hack and Fix
+\end_layout
+
+\begin_layout Standard
+Die idee hierbei war zu anfang einmal probieren ob der Code theoretisch
+ richtig funktionieren könnte, wenn man sich an die schriftlichen limitationen
+ hält.
+ Habe somit weniger als 10 zeichen eingegeben und wie Erwartet die negative
+ Antwort des Programms erhalten.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/buffer-overflow_error.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Erwarteter Error.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Die nächste Vorgehensweise war eben den Buffer Overflow zu erzeugen indem
+ man eine Zeichenkette eingibt die das vordefinierte Array des Programmes
+ überschreitet, und somit da Passwort Freigibt.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/buffer-overflow_hack.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Buffer-Overflow in action
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Dies hat bei meinem ersten Versuch perfekt funktioniert und ich konnte das
+ Passwort auslesen.
+ Allerdings jetzt beim Screenshotten für die Doku funktioniert es aus unerfindli
+chen Gründen nicht mehr.
+ Somit werde ich zusätzlich hier die Zweite möglichkeit testen: strings.
+ Dies gibt mir die strings der Kompilierten Datei aus und dabei auch das
+ Passwort.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/buffer-overflow_strings.png
+	width 15cm
+	height 8cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Passwortauslese mit strings
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Damit hat es Funktioniert und das Programm kann verbessert werden.
+ Was im Endeffekt bedeutet sämtliche vorkommnisse von strcmp zu strncmp
+ umzuschreiben.
+ Der Versuch danach wieder einen BufferOverflow zu erzwingen ist erwarteterweise
+ Gescheitert: 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/buffer-overflow_success.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Buffer Overflow Fixed
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Minimum und Maximum ermitteln
+\end_layout
+
+\begin_layout Standard
+Hierbei ist die Idee ein programm zu schreiben dem man so viele argumente
+ mitgeben kann wie man will, und danach diese Elemente mithilfe der For
+ Schleiffe miteinander Vergleicht und am Ende ein Min und ein Max ausgibt.
+ hierbei werden die Argumente die zum Programmstart mitgegeben werden von
+ strings (bzw char arrays) mittels atoi in int Konvertiert um diese auch
+ vergleichen zu können.
+ Für den Sourcecode hierzu Siehe Abschnitt 5.3.
+\end_layout
+
+\begin_layout Section
+Fehler verschluckt.
+\end_layout
+
+\begin_layout Standard
+Anhand der Dokumentation habe ich ermittelt, genau wie die Angabe vermuten
+ hat lasse, atoi keinerlei fehlerbehandlung enthält.
+ Eine alternative dazu war strtol (string to long) welches den string anstelle
+ eines int in einen long int umwandelt und zusätzlich fehlerbehandlung über
+ errno enthält.
+ 
+\end_layout
+
+\begin_layout Standard
+Errno selbst wird über ein Header file eingefügt und ist im endeffekt nur
+ ein int der vor der Verwendung von strtol mit 0 (null) initialisiert wird
+ und der wert danach nicht mehr 0 ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Mit diesem Wissen wurde dann das MinMax Programm vom Vorpunkt umgebaut um
+ ein mindestmaß an Fehlerbehandlung zu beinhalten.
+ Siehe hierzu Abschnitt 5.4.
+\end_layout
+
+\begin_layout Section
+Code
+\end_layout
+
+\begin_layout Subsection
+Typeconversion
+\end_layout
+
+\begin_layout Standard
+hierzu kein code vorhanden (für Validierungen der Annahmen a bis e ohne
+ d siehe Abschnitt 6.1)
+\end_layout
+
+\begin_layout Subsection
+Buffer Overflow hack
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=C,numbers=left,basicstyle={\small},showstringspaces=false,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#include <stdio.h> 
+\end_layout
+
+\begin_layout Plain Layout
+
+#include <string.h>
+\end_layout
+
+\begin_layout Plain Layout
+
+// NOTE: needs to be compiled with GCC option -fno-stack-protector to be
+ exploitable
+\end_layout
+
+\begin_layout Plain Layout
+
+int main(int argc, char *argv[]) {   
+\end_layout
+
+\begin_layout Plain Layout
+
+	char access_token = 0;   
+\end_layout
+
+\begin_layout Plain Layout
+
+	char name[11];   
+\end_layout
+
+\begin_layout Plain Layout
+
+	char password[11];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    if (argc != 2) {     
+\end_layout
+
+\begin_layout Plain Layout
+
+		printf("usage: buffer-overflow <username>
+\backslash
+n");     
+\end_layout
+
+\begin_layout Plain Layout
+
+		printf("e.g.
+ 
+\backslash
+"buffer-overflow admin
+\backslash
+"
+\backslash
+n");     
+\end_layout
+
+\begin_layout Plain Layout
+
+		printf("      then enter your password when prompted
+\backslash
+n");     
+\end_layout
+
+\begin_layout Plain Layout
+
+		return -1;   
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	strncpy(name, argv[1], 5);   
+\end_layout
+
+\begin_layout Plain Layout
+
+	printf("password (max 10 chars): ");   
+\end_layout
+
+\begin_layout Plain Layout
+
+	scanf("%7s", password);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (strncmp(name, "admin", 5) == 0 &&
+\end_layout
+
+\begin_layout Plain Layout
+
+	    strncmp(password, "letmein", 7) == 0) {         
+\end_layout
+
+\begin_layout Plain Layout
+
+			access_token = 97;   
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	printf("username = 
+\backslash
+"%s
+\backslash
+", password = 
+\backslash
+"%s
+\backslash
+", access token = %d (0x%x, '%c')
+\backslash
+n", name, password, access_token, access_token, access_token);   
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (access_token == 97) {     
+\end_layout
+
+\begin_layout Plain Layout
+
+		printf("FULL ACCESS GRANTED
+\backslash
+nSource Code Password is 
+\backslash
+"BuFfeR0veRFlOw
+\backslash
+"
+\backslash
+n");   
+\end_layout
+
+\begin_layout Plain Layout
+
+	} else {     
+\end_layout
+
+\begin_layout Plain Layout
+
+		printf("You need access token = %d (= 0x%x [hex], '%c' [ascii]) to access
+ the ZIP-File password
+\backslash
+n", 97, 97, 97);   
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+return 0; 
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+MinMax
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=C,numbers=left,basicstyle={\small},showstringspaces=false,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#include <stdio.h> 
+\end_layout
+
+\begin_layout Plain Layout
+
+#include <stdlib.h>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+int main (int argc, char* argv[]){
+\end_layout
+
+\begin_layout Plain Layout
+
+    int min = 0, max = 0, number_to_compare;          
+\end_layout
+
+\begin_layout Plain Layout
+
+	for (int i = 1; i < argc; i++)      
+\end_layout
+
+\begin_layout Plain Layout
+
+	{         
+\end_layout
+
+\begin_layout Plain Layout
+
+		number_to_compare = atoi(argv[i]);        
+\end_layout
+
+\begin_layout Plain Layout
+
+		max = number_to_compare > max ? number_to_compare : max;         
+\end_layout
+
+\begin_layout Plain Layout
+
+		min = number_to_compare < min ? number_to_compare : min;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+    printf("Minimum: %d, Maximum: %d 
+\backslash
+n", min, max);     
+\end_layout
+
+\begin_layout Plain Layout
+
+	return 0; 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+MinMax mit Errors
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=C,numbers=left,basicstyle={\small},showstringspaces=false,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#include <stdio.h> 
+\end_layout
+
+\begin_layout Plain Layout
+
+include <stdlib.h> 
+\end_layout
+
+\begin_layout Plain Layout
+
+#include <errno.h> 
+\end_layout
+
+\begin_layout Plain Layout
+
+#include <limits.h>
+\end_layout
+
+\begin_layout Plain Layout
+
+int main (int argc, char* argv[]){
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\end_layout
+
+\begin_layout Plain Layout
+
+	long int min = 0, max = 0, number_to_compare;          
+\end_layout
+
+\begin_layout Plain Layout
+
+	for (int i = 1; i < argc; i++)      
+\end_layout
+
+\begin_layout Plain Layout
+
+	{         
+\end_layout
+
+\begin_layout Plain Layout
+
+		errno = 0;         
+\end_layout
+
+\begin_layout Plain Layout
+
+		char * end;         
+\end_layout
+
+\begin_layout Plain Layout
+
+		number_to_compare = strtol(argv[i], &end, 10);                  
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+		if ((errno == ERANGE 
+\end_layout
+
+\begin_layout Plain Layout
+
+			&& (number_to_compare == LONG_MAX || number_to_compare == LONG_MIN))
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+			|| (errno != 0 && number_to_compare == 0))         
+\end_layout
+
+\begin_layout Plain Layout
+
+		{             
+\end_layout
+
+\begin_layout Plain Layout
+
+			perror("strtol");             
+\end_layout
+
+\begin_layout Plain Layout
+
+			exit(EXIT_FAILURE);         
+\end_layout
+
+\begin_layout Plain Layout
+
+		}         
+\end_layout
+
+\begin_layout Plain Layout
+
+		if (argv[i] == end) {             
+\end_layout
+
+\begin_layout Plain Layout
+
+			printf("No Valid numbers found
+\backslash
+n");             
+\end_layout
+
+\begin_layout Plain Layout
+
+			exit(EXIT_FAILURE);         
+\end_layout
+
+\begin_layout Plain Layout
+
+		}  
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+		max = number_to_compare > max ? number_to_compare : max;         
+\end_layout
+
+\begin_layout Plain Layout
+
+		min = number_to_compare < min ? number_to_compare : min;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+    printf("Minimum: %ld, Maximum: %ld 
+\backslash
+n", min, max);     
+\end_layout
+
+\begin_layout Plain Layout
+
+    return 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Tests
+\end_layout
+
+\begin_layout Subsection
+TypeConversions
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/conversions_test.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Konvertierungs Ergebnisse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Buffer Overflow Hack and Fix
+\end_layout
+
+\begin_layout Standard
+Siehe Figures 1, 2, 3 und 4.
+\end_layout
+
+\begin_layout Subsection
+MinMax
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/MinMax_test1.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MinMax Test1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/MinMax_test2.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MinMax Test2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+MinMax mit Fehler
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename //wsl$/Ubuntu-20.04/home/thomas/hgb/FHHGB/SWO3/Assignment1/MinMaxFixed_test1.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MinMax mit Fehlerausgabe
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+List of Figures
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

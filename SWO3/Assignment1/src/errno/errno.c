@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <limits.h>
 
-//int main (int argc, char** argv)
 int main (int argc, char* argv[]){
 
     long int min = 0, max = 0, number_to_compare;
