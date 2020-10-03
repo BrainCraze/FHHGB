@@ -28,16 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d7a2913-faf2-467a-b58b-cee3713b5f92" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/FHHGB.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SWO3/uebung3/touch/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WDP/UE01" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WDP/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WDP/contact.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WDP/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WDP/portfolio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWO3/Assignment1/##Hausübung1.lyx##" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWO3/uebung3/geo_v5/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWO3/uebung3/geo_v5/build/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SWO3/uebung3/geo_v5/build/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +45,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -79,9 +74,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -95,6 +90,7 @@
       <updated>1601705328302</updated>
       <workItem from="1601705330132" duration="4105000" />
       <workItem from="1601711744835" duration="871000" />
+      <workItem from="1601716773673" duration="285000" />
     </task>
     <servers />
   </component>
@@ -117,6 +113,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="553" y="315" width="329" height="300" key="#Other_File_Types" timestamp="1601716782549">
+      <screen x="0" y="0" width="1440" height="912" />
+    </state>
+    <state x="553" y="315" width="329" height="300" key="#Other_File_Types/0.0.1440.912@0.0.1440.912" timestamp="1601716782549" />
     <state x="460" y="252" width="535" height="461" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601712211766">
       <screen x="0" y="0" width="1440" height="912" />
     </state>
